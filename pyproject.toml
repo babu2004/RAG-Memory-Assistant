@@ -1,0 +1,12 @@
+[project]
+name = "rag-memory-assistant"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.4.6",
+    "openai>=2.43.0",
+    "requests>=2.34.2",
+    "sentence-transformers>=5.6.0",
+]
