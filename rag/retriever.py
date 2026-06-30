@@ -59,7 +59,7 @@ def retrieve(query, top_k=3):
 
         scores.append(
             {
-                "index": item["index"],
+                "id": item["id"],
                 "score": similarity
             }
         )

@@ -30,7 +30,8 @@ def build_embeddings():
     for i , embeddings in enumerate(memory_embeddings):
         structured_data.append(
             {
-                "index": i,
+                "id": memory["id"],
+                "course":memory["course"],
                 "embedding":embeddings.tolist()
             }
         )
