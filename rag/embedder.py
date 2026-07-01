@@ -22,20 +22,18 @@ def build_embeddings():
     
     memory_embeddings = model.encode(documents)
 
-   
-  
-
     structured_data = []
 
-    for i , embeddings in enumerate(memory_embeddings):
+    for memory, embedding in zip(memorys, memory_embeddings):
+
         structured_data.append(
             {
                 "id": memory["id"],
-                "course":memory["course"],
-                "embedding":embeddings.tolist()
+                "course": memory["course"],
+                "embedding": embedding.tolist()
             }
         )
-   
+    
     with open(embeddings_path, 'w', encoding='utf-8') as file:
         json.dump(structured_data, file, indent=4)
         
