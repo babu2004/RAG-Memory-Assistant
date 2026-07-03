@@ -13,7 +13,7 @@ faq_path = (current_dir / "../data/faq.json").resolve()
 
 with open(faq_path,"r",encoding = "utf-8") as file:
     faq_documents = json.load(file)
-print(faq_documents[0])
+
 
 faq_lookup = {
     faq['id']:faq
@@ -63,8 +63,10 @@ def answer_question(query):
 
         {query}
         """
-
-        response = provider.generate(prompt)
+        messages_array = [
+    {"role": "user", "content": prompt}
+]
+        response = provider.generate(messages_array)
 
         return response
 
