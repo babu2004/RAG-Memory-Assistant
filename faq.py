@@ -16,8 +16,8 @@ for course in raw_course:
     course_data = course_response.json()
 
     documents.extend(course_data)
-print(len(documents))
-print(documents[0])
+# print(len(documents))
+# print(documents[0])
 
 filename = "faq.json"
 

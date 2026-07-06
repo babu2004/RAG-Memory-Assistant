@@ -71,7 +71,3 @@ def retrieve(query, top_k=3):
 
     return scores[:top_k]
 
-results = retrieve(
-    "When does the course start?"
-)
-print (results)
