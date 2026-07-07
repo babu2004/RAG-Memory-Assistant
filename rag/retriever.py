@@ -1,73 +1,40 @@
-import json
 from pathlib import Path
-
 from sentence_transformers import SentenceTransformer
-from sentence_transformers.util import cos_sim
+import chromadb
 
-
-# --------------------------------------------------
-# Paths
-# --------------------------------------------------
 
 current_dir = Path(__file__).resolve().parent
 
-embeddings_path = (current_dir / "../data/embeddings.json").resolve()
+db_path = (current_dir.parent / "chroma_db").resolve()
 
+model = SentenceTransformer(str(current_dir.parent/"my_local_model"))
 
-# --------------------------------------------------
-# Load Embedding Model
-# --------------------------------------------------
-
-model = SentenceTransformer(
-    str(current_dir.parent / "my_local_model")
+client = chromadb.PersistentClient(
+    path = str(db_path)
 )
 
+collection = client.get_collection(
+    "faq"
+)
 
-# --------------------------------------------------
-# Load Stored Embeddings
-# --------------------------------------------------
+def reterive(query,top_k):
 
-with open(embeddings_path, "r", encoding="utf-8") as file:
+    query_embedding = model.encode(query).tolist()
 
-    embedding_data = json.load(file)
+    results = collection.query(
+        query_embeddings=[query_embedding],
+        n_results=top_k
+    )
 
+    retrived = []
 
-# Convert list back to vectors
+    for doc_id, distance in zip(results["ids"][0],results["distances"][0]):
 
-document_embeddings = [
-    item["embedding"]
-    for item in embedding_data
-]
-
-
-# --------------------------------------------------
-# Retrieve Function
-# --------------------------------------------------
-
-def retrieve(query, top_k=3):
-
-    query_embedding = model.encode(query)
-
-    scores = []
-
-    for item in embedding_data:
-
-        similarity = cos_sim(
-            query_embedding,
-            item["embedding"]
-        ).item()
-
-        scores.append(
+        retrived.append(
             {
-                "id": item["id"],
-                "score": similarity
+                "id":doc_id,
+                "score":1 - distance
             }
         )
 
-    scores.sort(
-        key=lambda x: x["score"],
-        reverse=True
-    )
-
-    return scores[:top_k]
-
+    return retrived

@@ -6,7 +6,7 @@ current_dir = Path(__file__).resolve().parent
 project_root = current_dir.parent
 sys.path.append(str(project_root))
 
-from retriever import retrieve
+from retriever import reterive
 from llm.config import provider
 
 faq_path = (current_dir / "../data/faq.json").resolve()
@@ -22,7 +22,7 @@ faq_lookup = {
 
 def answer_question(query):
 
-    results = retrieve(query=query,top_k=3)
+    results = reterive(query=query,top_k=3)
 
     context = ""
 
