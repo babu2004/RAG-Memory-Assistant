@@ -3,3 +3,9 @@ Artificial Intelligence is changing the world.
 Large Language Models are becoming increasingly powerful.
 
 Retrieval-Augmented Generation improves factual accuracy.
+
+Vector databases store embeddings.
+
+ChromaDB is an open-source vector database.
+
+Sentence Transformers create embeddings.

@@ -6,31 +6,38 @@
 
 # print(text)
 
-from chunker import chunk_text
+# from chunker import chunk_text
 
-text = """
-Artificial Intelligence is changing the world.
+# text = """
+# Artificial Intelligence is changing the world.
 
-Large Language Models are becoming increasingly powerful.
+# Large Language Models are becoming increasingly powerful.
 
-Retrieval-Augmented Generation improves factual accuracy.
+# Retrieval-Augmented Generation improves factual accuracy.
 
-Vector databases store embeddings.
+# Vector databases store embeddings.
 
-ChromaDB is an open-source vector database.
+# ChromaDB is an open-source vector database.
 
-Sentence Transformers create embeddings.
-"""
-
-
-chunks = chunk_text(text,chunk_size=50,overlap=10)
+# Sentence Transformers create embeddings.
+# """
 
 
-for i, chunk in enumerate(chunks):
+# chunks = chunk_text(text,chunk_size=50,overlap=10)
 
-    print("="*40)
 
-    print(f"chunk:{i+1}")
+# for i, chunk in enumerate(chunks):
 
-    print("="*40)
-    print(chunk)
+#     print("="*40)
+
+#     print(f"chunk:{i+1}")
+
+#     print("="*40)
+#     print(chunk)
+
+
+# testing ingest.py
+
+from ingest import ingest_document
+
+ingest_document("E:/AI-Engineering-Journey/rag_memory_assitant/RAG-Memory-Assistant/data/test.txt")
