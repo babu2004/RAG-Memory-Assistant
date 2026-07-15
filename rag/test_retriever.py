@@ -1,7 +1,7 @@
-from retriever import retrieve
+from retriever import reterive
 
-results = retrieve(
-    "When does the course start?"
+results = reterive(
+    "Who are the founders of Nexus Dynamics?",top_k=1
 )
 
 print(results)

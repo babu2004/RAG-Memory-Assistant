@@ -1,7 +1,9 @@
-import json 
-from pathlib import Path
 import sys
+from pathlib import Path
 
+
+
+#to run this file we need to set system path
 current_dir = Path(__file__).resolve().parent
 project_root = current_dir.parent
 sys.path.append(str(project_root))
@@ -9,64 +11,46 @@ sys.path.append(str(project_root))
 from retriever import reterive
 from llm.config import provider
 
-faq_path = (current_dir / "../data/faq.json").resolve()
-
-with open(faq_path,"r",encoding = "utf-8") as file:
-    faq_documents = json.load(file)
-
-
-faq_lookup = {
-    faq['id']:faq
-    for faq in faq_documents
-}
-
 def answer_question(query):
 
     results = reterive(query=query,top_k=3)
 
-    context = ""
+    context_parts = []
 
     for result in results:
 
-        faq = faq_lookup[result["id"]]
+        context_parts.append(
+            f""" 
 
-        context += f"""
-        
-        Course:
-        {faq["course"]}
+                Source: {result['metadata']['source']}
+            {result['document']}
+            """
+        )
 
-        Question:
-        {faq["question"]}
+    context = "\n --- \n".join(context_parts)
 
-        Answer:
-        {faq["answer"]}
+    prompt = f"""
+    You are a Retrieval-Augmented Generation.
 
+    Answer the user's question ONLY using the context below.
 
-        -----------------------------------------------------------
-        """
+    If the answer is not contained in the context,
+    say:
 
-        prompt = f"""
-        You are a teaching assistant for DataTalksClub.
+    "I don't have enough information."
 
-        Answer the user's question ONLY using the context below.
+    Context:
 
-        If the answer is not contained in the context,
-        say:
+    {context}
 
-        "I don't have enough information."
+    User Question:
 
-        Context:
-
-        {context}
-
-        User Question:
-
-        {query}
-        """
-        messages_array = [
-    {"role": "user", "content": prompt}
+    {query}
+    """
+    messages_array = [
+{"role": "user", "content": prompt}
 ]
-        response = provider.generate(messages_array)
+    response = provider.generate(messages_array)
 
-        return response
+    return response
 

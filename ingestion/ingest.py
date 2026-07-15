@@ -14,7 +14,7 @@ client = chromadb.PersistentClient(
     path = str(db_path)
 )
 
-collection = client.get_collection("faq")
+collection = client.get_or_create_collection(name ="general")
 
 def ingest_document(file_path:str):
 

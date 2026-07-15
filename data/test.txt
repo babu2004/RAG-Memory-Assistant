@@ -1,11 +1,22 @@
-Artificial Intelligence is changing the world.
+Company Knowledge Base: Q3 2026
 
-Large Language Models are becoming increasingly powerful.
+1. Executive Summary
+Nexus Dynamics is a global tech firm headquartered in Austin, Texas. The company was founded in 2022 by CEO Sarah Jenkins and CTO Michael Chen. Nexus specializes in AI-driven supply chain optimization and enterprise resource planning (ERP) software.
 
-Retrieval-Augmented Generation improves factual accuracy.
+2. Product Line
+- Nexus Flow: An AI-powered logistics and routing tool. It accounts for weather, traffic, and fuel efficiency.
+- Nexus Core: The foundational ERP platform used by over 500 enterprise clients.
+- Nexus Vision: A newly launched computer vision system designed for warehouse inventory tracking.
 
-Vector databases store embeddings.
+3. Key Personnel
+- Sarah Jenkins (Chief Executive Officer): Focuses on corporate strategy and investor relations.
+- Michael Chen (Chief Technology Officer): Leads the software engineering and data science teams.
+- Elena Rostova (VP of Customer Success): Manages client onboarding and support operations.
 
-ChromaDB is an open-source vector database.
+4. Company Policies
+- Remote Work: All employees are allowed to work remotely, but are required to attend an annual summit in Austin every October.
+- Office Hours: Core hours for team collaboration are 10:00 AM to 3:00 PM EST.
+- Data Privacy: All client data is encrypted at rest using AES-256 and is never shared with third-party vendors.
 
-Sentence Transformers create embeddings.
+5. Recent Announcements
+In August 2026, Nexus Dynamics acquired a smaller robotics firm, AutoBuild Solutions, to integrate physical robotic arms with the Nexus Vision inventory system. The merger made headlines and expanded the company's hardware division.

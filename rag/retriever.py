@@ -14,7 +14,7 @@ client = chromadb.PersistentClient(
 )
 
 collection = client.get_collection(
-    "faq"
+    "general"
 )
 
 def reterive(query,top_k):
@@ -28,11 +28,13 @@ def reterive(query,top_k):
 
     retrived = []
 
-    for doc_id, distance in zip(results["ids"][0],results["distances"][0]):
+    for doc_id, document, metadata, distance in zip(results["ids"][0],results["documents"][0],results["metadatas"][0],results["distances"][0]):
 
         retrived.append(
             {
                 "id":doc_id,
+                "document":document,
+                "metadata":metadata,
                 "score":1 - distance
             }
         )
