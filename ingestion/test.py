@@ -1,43 +1,44 @@
 
-# #testing the loader_text
+# #testing the loader_text from loaders.py
 # from chunker import load_text
 
 # text = load_text("/workspaces/RAG-Memory-Assistant/data/test.txt")
 
 # print(text)
 
-# from chunker import chunk_text
+""" ========================================================== """
 
-# text = """
-# Artificial Intelligence is changing the world.
+#testing the chunker.py
 
-# Large Language Models are becoming increasingly powerful.
+from chunker import chunk_text
 
-# Retrieval-Augmented Generation improves factual accuracy.
+text = """
+Artificial Intelligence is changing the world.
 
-# Vector databases store embeddings.
+Large Language Models are becoming increasingly powerful.
 
-# ChromaDB is an open-source vector database.
+Retrieval-Augmented Generation improves factual accuracy.
 
-# Sentence Transformers create embeddings.
-# """
+Vector databases store embeddings.
 
+ChromaDB is an open-source vector database.
 
-# chunks = chunk_text(text,chunk_size=50,overlap=10)
-
-
-# for i, chunk in enumerate(chunks):
-
-#     print("="*40)
-
-#     print(f"chunk:{i+1}")
-
-#     print("="*40)
-#     print(chunk)
+Sentence Transformers create embeddings.
+"""
 
 
-# testing ingest.py
+chunks = chunk_text(text,chunk_size=100,chunk_overlap=20)
 
-from ingest import ingest_document
 
-ingest_document("E:/AI-Engineering-Journey/rag_memory_assitant/RAG-Memory-Assistant/data/test.txt")
+for chunk in chunks:
+    print(chunk)
+    print("-"*40)
+
+
+"""==========================================="""
+
+# # testing ingest.py
+
+# from ingest import ingest_document
+
+# ingest_document("E:/AI-Engineering-Journey/rag_memory_assitant/RAG-Memory-Assistant/data/test.txt")
