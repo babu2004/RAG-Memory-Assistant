@@ -1,6 +1,6 @@
 from pathlib import Path 
 from sentence_transformers import SentenceTransformer
-from loaders import load_text
+from loaders import load_document
 from chunker import chunk_text
 import chromadb 
 
@@ -18,9 +18,9 @@ collection = client.get_or_create_collection(name ="general")
 
 def ingest_document(file_path:str):
 
-    text = load_text(file_path)
+    text = load_document(file_path)
 
-    chunks = chunk_text(text,chunk_size=200,overlap=15)
+    chunks = chunk_text(text,chunk_size=200,chunk_overlap=15)
 
     filename = Path(file_path).stem
 
