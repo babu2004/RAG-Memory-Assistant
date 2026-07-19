@@ -27,6 +27,6 @@ class GrokProvider(LLMProvider):
             model=self.model, 
             messages=messages,
             temperature=0.7,
-            max_completion_tokens=400  
+            max_completion_tokens=800  
         )
             return response.choices[0].message.content

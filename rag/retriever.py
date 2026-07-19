@@ -1,6 +1,7 @@
 from pathlib import Path
 from sentence_transformers import SentenceTransformer
 import chromadb
+from source_detection import detect_source
 
 
 current_dir = Path(__file__).resolve().parent
@@ -17,11 +18,25 @@ collection = client.get_collection(
     "general"
 )
 
+
+
 def reterive(query,top_k):
 
-    query_embedding = model.encode(query).tolist()
+    source = detect_source(query, collection)
 
-    results = collection.query(
+    query_embedding = model.encode(query).tolist()
+    
+    if source:
+            results = collection.query(
+        query_embeddings=[query_embedding],
+        n_results=top_k,
+        where = {"source":source}
+    )
+
+
+    else:
+    
+        results = collection.query(
         query_embeddings=[query_embedding],
         n_results=top_k
     )
