@@ -2,7 +2,7 @@ from pathlib import Path
 from sentence_transformers import SentenceTransformer
 import chromadb
 from source_detection import detect_source
-
+from document_registry import DocumentRegistry
 
 current_dir = Path(__file__).resolve().parent
 
@@ -17,12 +17,12 @@ client = chromadb.PersistentClient(
 collection = client.get_collection(
     "general"
 )
-
+registry = DocumentRegistry(collection)
 
 
 def reterive(query,top_k):
 
-    source = detect_source(query, collection)
+    source = detect_source(query, registry)
 
     query_embedding = model.encode(query).tolist()
     
