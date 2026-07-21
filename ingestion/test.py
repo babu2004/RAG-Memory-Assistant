@@ -39,6 +39,6 @@
 
 # testing ingest.py
 
-from ingest import ingest_document
+from .ingest import ingest_document
 
-ingest_document("/workspaces/RAG-Memory-Assistant/data/rag.pdf")
+ingest_document("/workspaces/RAG-Memory-Assistant/data/llm.pdf")

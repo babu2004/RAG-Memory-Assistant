@@ -1,8 +1,13 @@
 from pathlib import Path 
 from sentence_transformers import SentenceTransformer
-from loaders import load_document
-from chunker import chunk_text
+from .loaders import load_document
+from .chunker import chunk_text
 import chromadb 
+from rag.document_registry import DocumentRegistry
+
+
+
+
 
 current_dir = Path(__file__).resolve().parent
 
@@ -15,7 +20,7 @@ client = chromadb.PersistentClient(
 )
 
 collection = client.get_or_create_collection(name ="general")
-
+registry = DocumentRegistry(collection)
 def ingest_document(file_path:str):
 
     text = load_document(file_path)
@@ -50,6 +55,7 @@ def ingest_document(file_path:str):
         embeddings = embeddings.tolist(),
         metadatas = metadata
     )
+    registry.refresh()
 
     print(f"ingested {len(chunks)} chunks from {filename}")
 

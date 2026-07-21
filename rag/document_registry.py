@@ -21,4 +21,4 @@ class DocumentRegistry:
 
         })
     def get_sources(self):
-    return self.sources
+        return self.sources

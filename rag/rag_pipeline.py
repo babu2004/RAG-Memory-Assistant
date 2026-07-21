@@ -8,12 +8,14 @@ current_dir = Path(__file__).resolve().parent
 project_root = current_dir.parent
 sys.path.append(str(project_root))
 
-from retriever import reterive
+from retriever import retrive,extract_sources
 from llm.config import provider
 
 def answer_question(query):
 
-    results = reterive(query=query,top_k=3)
+    results = retrive(query=query,top_k=3)
+
+    unique_sources = extract_sources(results)
 
     context_parts = []
 
@@ -50,7 +52,8 @@ User Question:
 ]
     response = provider.generate(messages_array)
 
-    return response
+    final_response=f"{response}\n\nSources used: {', '.join(unique_sources)}"
+
+    return final_response
 
 
-how much accuracy can be increased by research findings reveal that including irrelevant documents

@@ -20,7 +20,7 @@ collection = client.get_collection(
 registry = DocumentRegistry(collection)
 
 
-def reterive(query,top_k):
+def retrive(query,top_k):
 
     source = detect_source(query, registry)
 
@@ -55,3 +55,14 @@ def reterive(query,top_k):
         )
 
     return retrived
+
+def extract_sources(retrieved_chunks):
+
+    unique_source = {
+        chunk["metadata"]["source"]
+        for chunk in retrieved_chunks
+    }
+
+    
+
+    return unique_source
