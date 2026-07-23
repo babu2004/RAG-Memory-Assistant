@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-
+import chromadb
 
 
 #to run this file we need to set system path
@@ -8,23 +8,57 @@ current_dir = Path(__file__).resolve().parent
 project_root = current_dir.parent
 sys.path.append(str(project_root))
 
-from retriever import retrive,extract_sources
+from retriever import  semantic_search,extract_sources
+from bm25_manager import BM25Manager
 from llm.config import provider
+
+current_dir = Path(__file__).resolve().parent
+db_path = (current_dir.parent / "chroma_db").resolve()
+client = chromadb.PersistentClient(
+    path = str(db_path)
+)
+
+collection = client.get_collection(
+    "general"
+)
+
+bm25 = BM25Manager(collection)
+
+
+def merge_results(semantic_results,bm25_results):
+
+   # Merge semantic and BM25 retrieval results.
+   # Duplicate chunks are removed using their chunk IDs.
+    merged = {}
+
+    for chunk in semantic_results:
+        merged[chunk["id"]] = chunk
+
+    for chunk in bm25_results:
+        if chunk["id"] not in merged:
+            merged[chunk["id"]] = chunk
+    
+    return list(merged.values())
+    
+
 
 def answer_question(query):
 
-    results = retrive(query=query,top_k=3)
+    semantic_results =  semantic_search(query=query,top_k=3)
+    bm25_results = bm25.search(query=query,top_k=3)
 
-    unique_sources = extract_sources(results)
+    merged_chunks = merge_results(semantic_results,bm25_results)
+
+    unique_sources = extract_sources(merged_chunks)
 
     context_parts = []
 
-    for result in results:
+    for result in merged_chunks:
 
         context_parts.append(
             f""" 
 
-                Source: {result['metadata']['source']}
+                Source: {result['metadata']}
             {result['document']}
             """
         )

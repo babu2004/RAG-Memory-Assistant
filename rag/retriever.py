@@ -20,7 +20,7 @@ collection = client.get_collection(
 registry = DocumentRegistry(collection)
 
 
-def retrive(query,top_k):
+def  semantic_search(query,top_k):
 
     source = detect_source(query, registry)
 
@@ -49,7 +49,7 @@ def retrive(query,top_k):
             {
                 "id":doc_id,
                 "document":document,
-                "metadata":metadata,
+                "metadata":metadata["source"],
                 "score":1 - distance
             }
         )
@@ -59,7 +59,7 @@ def retrive(query,top_k):
 def extract_sources(retrieved_chunks):
 
     unique_source = {
-        chunk["metadata"]["source"]
+        chunk["metadata"]
         for chunk in retrieved_chunks
     }
 

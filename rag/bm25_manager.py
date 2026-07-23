@@ -47,10 +47,10 @@ class BM25Manager:
         
         output = [
             {
-                "ids":i,
-                "documents":self.documents[i],
-                "metadatas":self.metadatas[i]["source"],
-                "scores":scores[i]
+                "id":i,
+                "document":self.documents[i],
+                "metadata":self.metadatas[i]["source"],
+                "score":scores[i]
             }
             for i in top_indeces
         ]
