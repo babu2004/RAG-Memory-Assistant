@@ -11,6 +11,7 @@ sys.path.append(str(project_root))
 from retriever import  semantic_search,extract_sources
 from bm25_manager import BM25Manager
 from llm.config import provider
+from reranker import Reranker
 
 current_dir = Path(__file__).resolve().parent
 db_path = (current_dir.parent / "chroma_db").resolve()
@@ -23,6 +24,7 @@ collection = client.get_collection(
 )
 
 bm25 = BM25Manager(collection)
+reranker = Reranker()
 
 
 def merge_results(semantic_results,bm25_results):
@@ -49,11 +51,14 @@ def answer_question(query):
 
     merged_chunks = merge_results(semantic_results,bm25_results)
 
-    unique_sources = extract_sources(merged_chunks)
+    ranked_chunks = reranker.rerank(query,merged_chunks)
+
+
+    unique_sources = extract_sources(ranked_chunks)
 
     context_parts = []
 
-    for result in merged_chunks:
+    for result in ranked_chunks:
 
         context_parts.append(
             f""" 
