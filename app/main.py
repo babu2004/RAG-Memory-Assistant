@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.schemas import QueryRequest, QueryResponse
-from rag.rag_pipeline import rag_pipeline
+from rag.rag_pipeline import answer_question
 
 app = FastAPI(
     title = "RAG-API",
@@ -21,11 +21,11 @@ def root():
 @app.post("/query",response_model=QueryResponse)
 def query(request: QueryRequest):
 
-    answer, sources = rag_pipeline(
+    result = answer_question(
         query = request.query
     )
     return QueryResponse(
-    answer=answer,
-    sources=sources
+    answer=result["answer"],
+    sources=result["sources"]
 )
 

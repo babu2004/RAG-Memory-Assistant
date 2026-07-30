@@ -89,10 +89,10 @@ User Question:
 
     final_response=f"{response}\n\nSources used: {', '.join(unique_sources)}"
 
-    return final_response
-#      {
-#     "answer": response,
-#     "sources": unique_sources
-# }
+     #final_response
+    return {
+    "answer": response,
+    "sources": unique_sources
+}
 
 
