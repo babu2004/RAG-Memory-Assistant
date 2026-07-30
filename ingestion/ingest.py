@@ -1,7 +1,7 @@
 from pathlib import Path 
 from sentence_transformers import SentenceTransformer
-from .loaders import load_document
-from .chunker import chunk_text
+from ingestion.loaders import load_document
+from ingestion.chunker import chunk_text
 import chromadb 
 from rag.document_registry import DocumentRegistry
 

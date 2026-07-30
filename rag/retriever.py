@@ -1,8 +1,8 @@
 from pathlib import Path
 from sentence_transformers import SentenceTransformer
 import chromadb
-from source_detection import detect_source
-from document_registry import DocumentRegistry
+from rag.source_detection import detect_source
+from rag.document_registry import DocumentRegistry
 
 current_dir = Path(__file__).resolve().parent
 

@@ -3,15 +3,11 @@ from pathlib import Path
 import chromadb
 
 
-#to run this file we need to set system path
-current_dir = Path(__file__).resolve().parent
-project_root = current_dir.parent
-sys.path.append(str(project_root))
 
-from retriever import  semantic_search,extract_sources
-from bm25_manager import BM25Manager
+from rag.retriever import  semantic_search,extract_sources
+from rag.bm25_manager import BM25Manager
 from llm.config import provider
-from reranker import Reranker
+from rag.reranker import Reranker
 
 current_dir = Path(__file__).resolve().parent
 db_path = (current_dir.parent / "chroma_db").resolve()
@@ -94,5 +90,9 @@ User Question:
     final_response=f"{response}\n\nSources used: {', '.join(unique_sources)}"
 
     return final_response
+#      {
+#     "answer": response,
+#     "sources": unique_sources
+# }
 
 

@@ -1,8 +1,8 @@
 import chromadb
-from bm25_manager import BM25Manager
+from rag.bm25_manager import BM25Manager
 from pathlib import Path
-from reranker import Reranker
-from retriever import semantic_search
+from rag.reranker import Reranker
+from rag.retriever import semantic_search
 
 current_dir = Path(__file__).resolve().parent
 db_path = (current_dir.parent / "chroma_db").resolve()

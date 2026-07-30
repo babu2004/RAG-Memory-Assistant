@@ -1,4 +1,4 @@
-from rag_pipeline import answer_question
+from rag.rag_pipeline import answer_question
 
 while True:
 
