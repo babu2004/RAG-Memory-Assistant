@@ -6,15 +6,72 @@
     <meta charset="UTF-8">
 
     <title>RAG Assistant</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="../static/script.js"></script>
+
 
 </head>
 
 <body>
 
-    <h1>🤖 RAG Assistant</h1>
+<div class="container">
 
-    <p>Production-style Retrieval-Augmented Generation System</p>
+    <header>
+
+        <h1>🤖 RAG Assistant</h1>
+
+        <p>
+            Production Retrieval-Augmented Generation System
+        </p>
+
+    </header>
+
+    <main>
+
+        <!-- Question -->
+         <section class="card">
+
+    <h2>Ask a Question</h2>
+
+    <textarea
+        id="query"
+        placeholder="Ask anything about your documents..."
+    ></textarea>
+
+    <button id="ask-btn">
+
+        Ask
+
+    </button>
+
+</section>
+
+        <!-- Answer -->
+         <section class="card">
+
+    <h2>Answer</h2>
+
+    <div id="answer">
+
+        Your answer will appear here...
+
+    </div>
+
+    <h3>Sources</h3>
+
+    <ul id="sources">
+
+    </ul>
+
+</section>
+
+    </main>
+
+</div>
 
 </body>
+<footer>
+    Powered by Hybrid Search • BM25 • Cross Encoder • ChromaDB • Groq
+</footer>
 
 </html>
