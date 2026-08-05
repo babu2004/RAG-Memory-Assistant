@@ -1,61 +1,54 @@
-from pathlib import Path 
+from pathlib import Path
 from sentence_transformers import SentenceTransformer
 from ingestion.loaders import load_document
 from ingestion.chunker import chunk_text
-import chromadb 
-from rag.document_registry import DocumentRegistry
+import chromadb
 
+db_path = Path("chroma_db").resolve()
 
-
-
-
+client = chromadb.PersistentClient(path=str(db_path))
 current_dir = Path(__file__).resolve().parent
-
-db_path = Path(current_dir.parent/"chroma_db").resolve()
-
-model = SentenceTransformer(str(current_dir.parent/"my_local_model"))
-
-client = chromadb.PersistentClient(
-    path = str(db_path)
+collection = client.get_or_create_collection("general")
+model = SentenceTransformer(
+    str(current_dir.parent / "my_local_model")
 )
 
-collection = client.get_or_create_collection(name ="general")
-registry = DocumentRegistry(collection)
-def ingest_document(file_path:str):
+
+def ingest_document(file_path: str, collection):
 
     text = load_document(file_path)
 
-    chunks = chunk_text(text,chunk_size=200,chunk_overlap=15)
+    chunks = chunk_text(
+        text,
+        chunk_size=200,
+        chunk_overlap=15
+    )
 
     filename = Path(file_path).stem
 
     ids = [
         f"{filename}_chunk_{i}"
-        for i in range(len(chunks)) 
+        for i in range(len(chunks))
     ]
 
     embeddings = model.encode(chunks)
 
-    # creating metadata 
-
-    metadata = []
-
-    for i in range(len(chunks)):
-
-        metadata.append(
-            {
-                "source":filename,
-                "chunk":i
-            }
-        )
+    metadata = [
+        {
+            "source": filename,
+            "chunk": i
+        }
+        for i in range(len(chunks))
+    ]
 
     collection.add(
-        ids = ids,
-        documents = chunks,
-        embeddings = embeddings.tolist(),
-        metadatas = metadata
+        ids=ids,
+        documents=chunks,
+        embeddings=embeddings.tolist(),
+        metadatas=metadata
     )
-    registry.refresh()
 
-    print(f"ingested {len(chunks)} chunks from {filename}")
-
+    return {
+        "filename": filename,
+        "chunks": len(chunks)
+    }

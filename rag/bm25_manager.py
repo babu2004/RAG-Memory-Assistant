@@ -24,17 +24,23 @@ class BM25Manager:
         self.documents = results["documents"]
         self.ids = results["ids"]
         self.metadatas = results["metadatas"]
+        if not self.documents:
+            self.bm25 = None
+            
+        else:
+            tokenized = [
 
-        tokenized = [
+                doc.lower().split()
+                for doc in self.documents
+            ]
 
-            doc.lower().split()
-            for doc in self.documents
-        ]
-
-        self.bm25 = BM25Okapi(tokenized)
+            self.bm25 = BM25Okapi(tokenized)
 
 
     def search(self, query, top_k=5):
+
+        if self.bm25 is None:
+            return []
 
         query_tokens = query.lower().split()
         scores = self.bm25.get_scores(query_tokens)
@@ -44,6 +50,7 @@ class BM25Manager:
             key=lambda i: scores[i],
             reverse = True
         )[:top_k]
+        
         
         output = [
             {
