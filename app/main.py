@@ -95,3 +95,21 @@ def upload_pdf(file: UploadFile = File(...)):
         "filename": result["filename"],
         "chunks": result["chunks"]
     }
+
+@app.delete("/collection")
+def delete_collection():
+
+    try:
+        client.delete_collection("general")
+    except Exception:
+        return {
+            "message": "Knowledge base is already empty."
+        }
+
+    for file_path in UPLOAD_DIR.iterdir():
+        if file_path.is_file():
+            file_path.unlink()
+
+    return {
+        "message": "Knowledge base deleted successfully."
+    }
