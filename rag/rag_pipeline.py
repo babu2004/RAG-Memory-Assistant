@@ -4,7 +4,11 @@ import chromadb
 
 
 
-from rag.retriever import  semantic_search,extract_sources
+from rag.retriever import (
+    semantic_search,
+    extract_sources,
+    refresh_collection
+)
 from rag.bm25_manager import BM25Manager
 from llm.config import provider
 from rag.reranker import Reranker
@@ -22,6 +26,15 @@ collection = client.get_collection(
 bm25 = BM25Manager(collection)
 reranker = Reranker()
 
+def refresh_rag_components():
+
+    global collection, bm25
+
+    collection = client.get_collection("general")
+
+    bm25 = BM25Manager(collection)
+
+    refresh_collection()
 
 def merge_results(semantic_results,bm25_results):
 

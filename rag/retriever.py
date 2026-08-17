@@ -19,6 +19,12 @@ collection = client.get_collection(
 )
 registry = DocumentRegistry(collection)
 
+def refresh_collection():
+    global collection, registry
+
+    collection = client.get_collection("general")
+    registry = DocumentRegistry(collection)
+
 
 def  semantic_search(query,top_k):
 

@@ -12,7 +12,7 @@ collection = client.get_or_create_collection("general")
 
 result = ingest_document(
     "data/rag.pdf",
-    collection
+    collection 
 )
 
 registry = DocumentRegistry(collection)
