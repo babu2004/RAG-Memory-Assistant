@@ -2,9 +2,7 @@ import shutil
 from pathlib import Path
 import chromadb
 
-from fastapi import FastAPI,Request
-from fastapi import UploadFile, File
-
+from fastapi import FastAPI, Request, UploadFile, File, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -66,11 +64,11 @@ def query(request: QueryRequest):
 @app.post("/upload")
 def upload_pdf(file: UploadFile = File(...)):
 
-    if not file.filename.endswith(".pdf"):
-        return {
-            "message": "Only pdf files are allowed."
-        }
-
+    if not file.filename.lower().endswith(".pdf"):
+        raise HTTPException(
+            status_code=400,
+            detail="Only PDF files are allowed."
+        )
     file_path = UPLOAD_DIR / file.filename
 
     with open(file_path, "wb") as buffer:

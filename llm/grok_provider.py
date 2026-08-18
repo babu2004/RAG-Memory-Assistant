@@ -16,7 +16,7 @@ client = OpenAI(
 class GrokProvider(LLMProvider):
     
     #  New updated model name
-    def __init__(self, model="llama-3.3-70b-versatile"): 
+    def __init__(self, model="qwen/qwen3.6-27b"): 
 
         self.model = model
 
