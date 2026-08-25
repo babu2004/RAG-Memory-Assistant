@@ -14,7 +14,7 @@ high-level frameworks.
 
 ------------------------------------------------------------------------
 
-## 🚀 Features
+##  Features
 
 ### Document Ingestion
 
@@ -87,7 +87,7 @@ the local development environment.
 
 ------------------------------------------------------------------------
 
-# 🏗️ Architecture
+#  Architecture
 
 ``` text
                          ┌──────────────────┐
@@ -137,7 +137,7 @@ the local development environment.
 
 ------------------------------------------------------------------------
 
-# 🔎 Retrieval Pipeline
+#  Retrieval Pipeline
 
 The core retrieval pipeline is:
 
@@ -172,7 +172,7 @@ Query Embedding
 
 ------------------------------------------------------------------------
 
-# 📈 Project Evolution
+#  Project Evolution
 
 One of the goals of this project was to understand how a RAG system
 evolves from a simple implementation into a more capable retrieval
@@ -254,7 +254,7 @@ and build a temporary knowledge base from the uploaded document.
 
 ------------------------------------------------------------------------
 
-# 🧠 Why Hybrid Search?
+#  Why Hybrid Search?
 
 Semantic search is good at understanding meaning.
 
@@ -274,7 +274,7 @@ Combining both approaches provides complementary retrieval signals.
 
 ------------------------------------------------------------------------
 
-# 🎯 Why Cross-Encoder Reranking?
+#  Why Cross-Encoder Reranking?
 
 Initial retrieval is optimized for finding candidate documents
 efficiently.
@@ -299,7 +299,7 @@ LLM Context
 
 ------------------------------------------------------------------------
 
-# 📂 Project Structure
+#  Project Structure
 
 ``` text
 RAG-Memory-Assistant/
@@ -341,7 +341,7 @@ RAG-Memory-Assistant/
 
 ------------------------------------------------------------------------
 
-# 🛠️ Technologies Used
+#  Technologies Used
 
 ### Language
 
@@ -385,7 +385,7 @@ RAG-Memory-Assistant/
 
 ------------------------------------------------------------------------
 
-# 🚀 Running Locally
+#  Running Locally
 
 ## 1. Clone the repository
 
@@ -427,7 +427,7 @@ http://localhost:8000
 
 ------------------------------------------------------------------------
 
-# 🐳 Running with Docker
+#  Running with Docker
 
 Build the image:
 
@@ -451,7 +451,7 @@ The application can then be used directly from the browser.
 
 ------------------------------------------------------------------------
 
-# 🔌 API Endpoints
+#  API Endpoints
 
   Method     Endpoint        Description
   ---------- --------------- ----------------------------------
@@ -468,7 +468,7 @@ FastAPI automatically provides interactive API documentation at:
 
 ------------------------------------------------------------------------
 
-# 💡 Example Workflow
+#  Example Workflow
 
 ### 1. Upload a document
 
@@ -527,7 +527,7 @@ Sources used:
 
 ------------------------------------------------------------------------
 
-# 🧪 Engineering Concepts Demonstrated
+#  Engineering Concepts Demonstrated
 
 This project was built to understand and demonstrate practical AI
 engineering concepts including:
@@ -552,7 +552,7 @@ engineering concepts including:
 
 ------------------------------------------------------------------------
 
-# 🔬 Engineering Decisions
+#  Engineering Decisions
 
 ### JSON → ChromaDB
 
@@ -584,29 +584,7 @@ unnecessary multi-user or multi-tenant infrastructure.
 
 ------------------------------------------------------------------------
 
-# 📌 Current Status
-
-``` text
-Document Loading             ✅
-Recursive Chunking           ✅
-Embeddings                   ✅
-ChromaDB                     ✅
-Semantic Search              ✅
-BM25 Retrieval               ✅
-Hybrid Search                ✅
-Cross-Encoder Reranking      ✅
-RAG Generation               ✅
-Source Attribution           ✅
-FastAPI                      ✅
-PDF Upload                   ✅
-Knowledge Base Deletion      ✅
-Browser UI                   ✅
-Docker                       ✅
-```
-
-------------------------------------------------------------------------
-
-# 🔮 Future Improvements
+#  Future Improvements
 
 Possible future improvements include:
 
@@ -623,19 +601,7 @@ the project focused on the core RAG architecture.
 
 ------------------------------------------------------------------------
 
-# 👨‍💻 Author
-
-**R. Ganesh Babu**
-
-Master of Data Science student focused on Machine Learning, AI
-Engineering, LLM applications, and Retrieval-Augmented Generation.
-
--   GitHub: https://github.com/babu2004
--   LinkedIn: https://www.linkedin.com/in/ganesh-babu-333a7530a/
-
-------------------------------------------------------------------------
-
-## ⭐ Project Goal
+##  Project Goal
 
 The goal of this project is not simply to build a chatbot.
 
