@@ -14,7 +14,22 @@ high-level frameworks.
 
 ------------------------------------------------------------------------
 
-##  Features
+## Demo
+
+The application provides a browser-based interface where users can:
+
+1. Upload a PDF document
+2. Ask questions about the uploaded document
+3. Receive grounded answers from the RAG pipeline
+4. View the source document used for the answer
+5. Clear the current knowledge base and upload another document
+
+The complete application is also containerized with Docker and has been
+successfully tested locally.
+
+------------------------------------------------------------------------
+
+## Features
 
 ### Document Ingestion
 
@@ -87,7 +102,7 @@ the local development environment.
 
 ------------------------------------------------------------------------
 
-#  Architecture
+# Architecture
 
 ``` text
                          ┌──────────────────┐
@@ -137,7 +152,7 @@ the local development environment.
 
 ------------------------------------------------------------------------
 
-#  Retrieval Pipeline
+# Retrieval Pipeline
 
 The core retrieval pipeline is:
 
@@ -172,13 +187,15 @@ Query Embedding
 
 ------------------------------------------------------------------------
 
-#  Project Evolution
+# Project Evolution
 
 One of the goals of this project was to understand how a RAG system
 evolves from a simple implementation into a more capable retrieval
 architecture.
 
 ## Version 2.0 --- JSON-Based Semantic Retrieval
+
+Git tag: `v2.0-json-rag`
 
 The first implementation used manually persisted embeddings.
 
@@ -206,6 +223,8 @@ This version helped establish the fundamentals of:
 
 ## Version 2.1 --- ChromaDB Migration
 
+Git tag: `v2.1-chromadb`
+
 The embedding storage layer was migrated from JSON to ChromaDB.
 
 ``` text
@@ -227,6 +246,8 @@ part of the project's learning and evolution history.
 ------------------------------------------------------------------------
 
 ## Version 3.0 --- General-Purpose RAG
+
+Git tag: `v3.0-general-rag`
 
 The system was expanded from a fixed FAQ dataset into a general-purpose
 document retrieval engine.
@@ -254,7 +275,7 @@ and build a temporary knowledge base from the uploaded document.
 
 ------------------------------------------------------------------------
 
-#  Why Hybrid Search?
+# Why Hybrid Search?
 
 Semantic search is good at understanding meaning.
 
@@ -274,7 +295,7 @@ Combining both approaches provides complementary retrieval signals.
 
 ------------------------------------------------------------------------
 
-#  Why Cross-Encoder Reranking?
+# Why Cross-Encoder Reranking?
 
 Initial retrieval is optimized for finding candidate documents
 efficiently.
@@ -299,7 +320,7 @@ LLM Context
 
 ------------------------------------------------------------------------
 
-#  Project Structure
+# Project Structure
 
 ``` text
 RAG-Memory-Assistant/
@@ -336,12 +357,13 @@ RAG-Memory-Assistant/
 ├── .dockerignore
 ├── pyproject.toml
 ├── uv.lock
+├── local_model.py
 └── README.md
 ```
 
 ------------------------------------------------------------------------
 
-#  Technologies Used
+# Technologies Used
 
 ### Language
 
@@ -349,7 +371,7 @@ RAG-Memory-Assistant/
 
 ### LLM / NLP
 
--   LLM APIs
+-   LLM API
 -   Sentence Transformers
 -   Embeddings
 -   Cross-Encoder Reranking
@@ -385,7 +407,7 @@ RAG-Memory-Assistant/
 
 ------------------------------------------------------------------------
 
-#  Running Locally
+# Running Locally
 
 ## 1. Clone the repository
 
@@ -413,7 +435,15 @@ XAI_API_KEY=your_api_key
 
 Do not commit `.env` to Git.
 
-## 4. Start the API
+## 4. Download and save the model from hf
+
+run the `local_model.py` file
+
+``` bash
+uv run python local_model.py
+```
+
+## 5. Start the API
 
 ``` bash
 uv run uvicorn app.main:app --reload
@@ -427,7 +457,9 @@ http://localhost:8000
 
 ------------------------------------------------------------------------
 
-#  Running with Docker
+# Running with Docker
+
+The Docker image has been successfully built and tested locally.
 
 Build the image:
 
@@ -451,7 +483,7 @@ The application can then be used directly from the browser.
 
 ------------------------------------------------------------------------
 
-#  API Endpoints
+# API Endpoints
 
   Method     Endpoint        Description
   ---------- --------------- ----------------------------------
@@ -468,7 +500,7 @@ FastAPI automatically provides interactive API documentation at:
 
 ------------------------------------------------------------------------
 
-#  Example Workflow
+# Example Workflow
 
 ### 1. Upload a document
 
@@ -527,7 +559,7 @@ Sources used:
 
 ------------------------------------------------------------------------
 
-#  Engineering Concepts Demonstrated
+# Engineering Concepts Demonstrated
 
 This project was built to understand and demonstrate practical AI
 engineering concepts including:
@@ -552,7 +584,7 @@ engineering concepts including:
 
 ------------------------------------------------------------------------
 
-#  Engineering Decisions
+# Engineering Decisions
 
 ### JSON → ChromaDB
 
@@ -584,20 +616,20 @@ unnecessary multi-user or multi-tenant infrastructure.
 
 ------------------------------------------------------------------------
 
-#  Future Improvements
+# Future Extensions
 
-Possible future improvements include:
+Potential extensions include:
 
--   Retrieval and generation evaluation pipelines
+-   Retrieval and generation evaluation
 -   Retrieval metrics such as Hit Rate and MRR
 -   Query expansion and rewriting
 -   Streaming LLM responses
 -   Authentication and multi-user document isolation
--   More document formats
+-   Additional document formats
 -   Cloud deployment
 
-These are intentionally kept outside the current implementation to keep
-the project focused on the core RAG architecture.
+These are intentionally outside the current implementation so the
+project remains focused on the core RAG architecture.
 
 ------------------------------------------------------------------------
 
